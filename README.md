@@ -1,6 +1,9 @@
-# nginx-nanoserver
-This dockerfile uses native 64 bit version of [nginx](http://nginx.org) from http://nginx.kr and installs it to [microsoft/nanoserver](https://hub.docker.com/r/microsoft/nanoserver/) based container.
-Official version of nginx cannot be used because it is 32 bit version of binary which is not supported on nano server.
+# nginx-win-servercore
+
+Originally forked from https://github.com/olljanat/nginx-nanoserver this variant based on full featured, production ready nginx for windows http://nginx-win.ecsds.eu/.
+
+Because nginx-win requires vcredist (C++ 2010 ) and nanoserver support only MSIX packages this dockerfile based on servercore image for ability to deploy required redistributable packages (vcredist_x86.exe & vcredist_x64.exe). Maybe later i'll try to investigate what exact dlls needed and try to build on nanoserver. Additionally nanoserver does not contain powershell since 1709 version (should be installed additionally).
+
 
 ## Build
 ```bash
