@@ -7,10 +7,10 @@ Because nginx-win requires vcredist (C++ 2010 ) and nanoserver support only MSIX
 
 ## Build
 ```bash
-docker build -t nginx-nanoserver .
+docker build -t nginx-win-servercore .
 ```
 
 ## Run
 ```bash
-docker run -d --name nginx -p 80:80 nginx-nanoserver
+docker run -d --name nginx -p 80:80 nginx-win-servercore
 ```
