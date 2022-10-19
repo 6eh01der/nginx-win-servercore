@@ -3,7 +3,7 @@ ENV VERSION 1.21.3.1
 
 SHELL ["powershell", "-command"]
 # Download and extract nginx-win
-RUN Invoke-WebRequest -Uri http://nginx-win.ecsds.eu/download/nginx%201.21.3.1%20WhiteHorse.zip -OutFile c:\nginx-$ENV:VERSION.zip -verbose; \
+RUN Invoke-WebRequest -Uri http://nginx-win.ecsds.eu/download/nginx%201.21.7.2%20WhiteHorse.zip -OutFile c:\nginx-$ENV:VERSION.zip -verbose; \
 	Expand-Archive -Path C:\nginx-$ENV:VERSION.zip -DestinationPath C:\nginx-$ENV:VERSION -Force -verbose; \
 	Remove-Item -Path c:\nginx-$ENV:VERSION.zip -Confirm:$False; \
 	Rename-Item -Path nginx-$ENV:VERSION -NewName nginx-win
