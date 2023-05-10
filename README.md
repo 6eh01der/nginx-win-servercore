@@ -6,11 +6,11 @@ Because nginx-win require vcredist (C++ 2010 ) and nanoserver support only MSIX 
 
 
 ## Build
-```bash
-docker build -t nginx-win-servercore .
+```powershell
+docker build --build-arg VERSION="1.23.3.2" --build-arg ZIP_URL="http://nginx-win.ecsds.eu/download/nginx%201.23.3.2%20SnapDragonfly.zip" -t nginx-win-nanoserver .
 ```
 
 ## Run
-```bash
-docker run -d --name nginx -p 80:80 nginx-win-servercore
+```powershell
+docker run -d --name nginx --expose 80 -p 80:80 nginx-win-nanoserver
 ```
