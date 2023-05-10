@@ -1,16 +1,22 @@
 FROM mcr.microsoft.com/windows/servercore:ltsc2019
-ENV VERSION 1.23.1.1
+ARG VERSION
+ARG ZIP_URL
+ENV VCR86 "http://nginx-win.ecsds.eu/download/vcredist_x86.exe"
+ENV VCR64 "http://nginx-win.ecsds.eu/download/vcredist_x64.exe"
+ENV PORT 80
+ENV PROTO http
+ENV CONF nginx-win.conf
 
 SHELL ["powershell", "-command"]
 # Download and extract nginx-win
-RUN Invoke-WebRequest -Uri http://nginx-win.ecsds.eu/download/nginx%201.23.1.1%20SnapDragonfly.zip -OutFile c:\nginx-$ENV:VERSION.zip -Verbose; \
+RUN Invoke-WebRequest -Uri $ENV:ZIP_URL -OutFile c:\nginx-$ENV:VERSION.zip -Verbose; \
     Expand-Archive -Path C:\nginx-$ENV:VERSION.zip -DestinationPath C:\nginx-$ENV:VERSION -Force -Verbose; \
     Remove-Item -Path c:\nginx-$ENV:VERSION.zip -Confirm:$False -Verbose; \
     Rename-Item -Path nginx-$ENV:VERSION -NewName nginx-win -Verbose; \
 # Download and install vcredist
-    Invoke-WebRequest -Uri http://nginx-win.ecsds.eu/download/vcredist_x86.exe -OutFile c:\nginx-win\vcredist_x86.exe -Verbose; \
+    Invoke-WebRequest -Uri $ENV:VCR86 -OutFile c:\nginx-win\vcredist_x86.exe -Verbose; \
     C:\nginx-win\vcredist_x86.exe /q /norestart /serialdownload | Out-Null; \
-    Invoke-WebRequest -Uri http://nginx-win.ecsds.eu/download/vcredist_x64.exe -OutFile c:\nginx-win\vcredist_x64.exe -Verbose; \
+    Invoke-WebRequest -Uri $ENV:VCR64 -OutFile c:\nginx-win\vcredist_x64.exe -Verbose; \
     C:\nginx-win\vcredist_x64.exe /q /norestart /serialdownload | Out-Null; \
     Remove-Item -Path c:\nginx-win\* -Include vcredist_* -Confirm:$False -Verbose; \
 # Make sure that Docker always uses default DNS servers which hosted by Dockerd.exe
@@ -23,12 +29,11 @@ RUN Invoke-WebRequest -Uri http://nginx-win.ecsds.eu/download/nginx%201.23.1.1%2
 
 USER ContainerUser
 WORKDIR C:\\nginx-win
-EXPOSE 80
-CMD ["nginx.exe", "-c", "conf\\nginx-win.conf"]
+CMD C:\nginx-win\nginx.exe -c C:\nginx-win\conf\$ENV:CONF
 
 HEALTHCHECK CMD powershell -command \  
     try { \
-     $response = iwr http://localhost:80 -UseBasicParsing; \
+     $response = iwr ${ENV:PROTO}://localhost:${ENV:PORT} -UseBasicParsing; \
      if ($response.StatusCode -eq 200) { return 0} \
      else {return 1}; \
     } catch { return 1 }
