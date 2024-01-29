@@ -1,6 +1,6 @@
 # nginx-win-servercore
 
-Link to image at Docker Hub - https://hub.docker.com/r/6eh01der/nginx-win
+Docker Hub repo - https://hub.docker.com/r/6eh01der/nginx-win
 
 Originally forked from https://github.com/olljanat/nginx-nanoserver this variant based on full featured, production ready nginx for windows http://nginx-win.ecsds.eu/.
 
