@@ -14,3 +14,9 @@ docker build --build-arg VERSION="1.23.3.5" --build-arg ZIP_URL="http://nginx-wi
 ```powershell
 docker run -d --name nginx --expose 80 -p 80:80 nginx-win-servercore
 ```
+
+## Override html directory for example by mounting from host:
+
+```powershell
+docker run -d --name nginx --expose 80 -p 80:80 -v .\html:C:\nginx-win\html nginx-win-servercore
+```
