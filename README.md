@@ -9,10 +9,11 @@ Because nginx-win require vcredist (C++ 2010 ) and nanoserver support only MSIX 
 
 ## Build
 
-Set required nginx-win version (1.23.3.5 for example)
+Set required nginx-win version (1.25.4.1%20SnapDragonfly for example, where %20 is URL-encoded space)
 
 ```powershell
-docker build --build-arg VERSION="1.23.3.5" --build-arg ZIP_URL="http://nginx-win.ecsds.eu/download/nginx%201.23.3.5%20SnapDragonfly.zip" -t nginx-win-servercore .
+$Version="1.25.4.1%20SnapDragonfly"
+docker build --build-arg VERSION="$Version" --build-arg ZIP_URL="http://nginx-win.ecsds.eu/download/nginx%20$Version.zip" -t nginx-win-servercore .
 ```
 
 ## Run
