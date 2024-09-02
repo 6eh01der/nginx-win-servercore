@@ -9,7 +9,7 @@ ENV CONF nginx-win.conf
 
 SHELL ["powershell", "-command"]
 # Download and extract nginx-win
-RUN $ErrorActionPreference = "Stop"; \
+RUN $ErrorActionPreference = 'Stop'; \
     Invoke-WebRequest -Uri $ENV:ZIP_URL -OutFile c:\nginx-$ENV:VERSION.zip -Verbose; \
     Expand-Archive -Path C:\nginx-$ENV:VERSION.zip -DestinationPath C:\nginx-$ENV:VERSION -Force -Verbose; \
     Remove-Item -Path c:\nginx-$ENV:VERSION.zip -Confirm:$False -Verbose; \
