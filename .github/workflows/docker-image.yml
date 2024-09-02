@@ -17,4 +17,4 @@ jobs:
     - name: Build the Docker image
       run: docker build --build-arg VERSION="$ENV:Version" --build-arg ZIP_URL="http://nginx-win.ecsds.eu/download/nginx%20$ENV:Version.zip" -t nginx-win-servercore .
       env:
-        Version: "1.25.4.1%20SnapDragonfly"
+        Version: "1.25.4.2%20SnapDragonfly"
