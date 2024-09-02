@@ -8,6 +8,9 @@ Because nginx-win require vcredist (C++ 2010 ) and nanoserver support only MSIX 
 
 
 ## Build
+
+Set required nginx-win version (1.23.3.5 for example)
+
 ```powershell
 docker build --build-arg VERSION="1.23.3.5" --build-arg ZIP_URL="http://nginx-win.ecsds.eu/download/nginx%201.23.3.5%20SnapDragonfly.zip" -t nginx-win-servercore .
 ```
@@ -18,7 +21,6 @@ docker run -d --name nginx --expose 80 -p 80:80 nginx-win-servercore
 ```
 
 ## Override conf directory for example by mounting from host:
-
 ```powershell
 docker run -d --name nginx --expose 80 -p 80:80 -v .\conf:C:\nginx-win\conf nginx-win-servercore
 ```
