@@ -30,3 +30,8 @@ docker run -d --name nginx --expose 80 -p 80:80 nginx-win-servercore
 ```powershell
 docker run -d --name nginx --expose 80 -p 80:80 -v .\conf:C:\nginx-win\conf nginx-win-servercore
 ```
+
+## Override healthcheck port to specific port configured in nginx:
+```powershell
+docker run -d --name nginx --expose 80 -p 80:8080 -e PORT=8080 nginx-win-servercore
+```
