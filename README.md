@@ -12,8 +12,13 @@ Because nginx-win require vcredist (C++ 2010 ) and nanoserver support only MSIX 
 Set required nginx-win version (1.25.4.1%20SnapDragonfly for example, where %20 is URL-encoded space)
 
 ```powershell
-$Version="1.25.4.1%20SnapDragonfly"
-docker build --build-arg VERSION="$Version" --build-arg ZIP_URL="http://nginx-win.ecsds.eu/download/nginx%20$Version.zip" -t nginx-win-servercore .
+docker build --build-arg VERSION="1.25.4.1%20SnapDragonfly" -t nginx-win-servercore .
+```
+
+Download URL, port and protocol could be overrided by relevant arguments - DLURL, PORT, PROTO. Default values are "http://nginx-win.ecsds.eu/download", "80" and "http". For example:
+
+```powershell
+docker build --build-arg VERSION="1.25.4.1%20SnapDragonfly" --build-arg DLURL="http://somesite.com/download" --build-arg PORT="8080" --build-arg PROTO="http" -t nginx-win-servercore .
 ```
 
 ## Run
