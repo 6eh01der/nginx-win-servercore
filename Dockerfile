@@ -1,8 +1,8 @@
 FROM mcr.microsoft.com/windows/servercore:ltsc2019
 ARG VERSION
 ARG DLURL="http://nginx-win.ecsds.eu/download"
-ARG PORT=80
-ARG PROTO="http"
+ENV PORT=80
+ENV PROTO="http"
 
 SHELL ["powershell", "-command"]
 # Download and extract nginx-win
