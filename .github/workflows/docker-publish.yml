@@ -28,5 +28,5 @@ jobs:
         env:
           Version: "1.29.1.1%20SnowDrop"
 
-      - name: Push Docker image to GHCR
+      - name: Push Docker image to Docker Hub
         run: docker push ${{ github.actor }}/nginx-win:ltsc2019-"$ENV:Version"
