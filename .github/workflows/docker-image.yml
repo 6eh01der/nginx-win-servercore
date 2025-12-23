@@ -17,4 +17,4 @@ jobs:
     - name: Build the Docker image
       run: docker build --build-arg VERSION="$ENV:Version" -t nginx-win-servercore .
       env:
-        Version: "1.25.4.1%20SnapDragonfly"
+        Version: "1.29.1.1%20SnowDrop"
