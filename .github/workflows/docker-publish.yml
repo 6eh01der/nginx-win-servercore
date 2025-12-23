@@ -27,10 +27,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build --build-arg VERSION="$ENV:Version" -t nginx-win-servercore .
-      
-      - name: Tag Docker image
-        run: docker tag nginx-win-servercore:latest ${{ github.actor }}/nginx-win:ltsc2019-"$ENV:Version"
+        run: docker build --build-arg VERSION="$ENV:Version" -t ${{ github.actor }}/nginx-win:ltsc2019-$($ENV:Version.split('%')[0]) .
 
       - name: Push Docker image to Docker Hub
-        run: docker push ${{ github.actor }}/nginx-win:ltsc2019-"$ENV:Version"
+        run: docker push ${{ github.actor }}/nginx-win:ltsc2019-$($ENV:Version.split('%')[0])
