@@ -24,7 +24,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build --build-arg VERSION="$ENV:Version" -t nginx-win-servercore .
+        run: docker build --build-arg VERSION="$ENV:Version" -t ${{ github.actor }}/nginx-win:ltsc2019-"$ENV:Version" .
         env:
           Version: "1.29.1.1%20SnowDrop"
 
