@@ -8,13 +8,6 @@ name: Docker
 on:
   workflow_dispatch:
 
-env:
-  # Use docker.io for Docker Hub if empty
-  REGISTRY: ghcr.io
-  # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}
-
-
 jobs:
   build:
 
@@ -36,4 +29,4 @@ jobs:
           Version: "1.29.1.1%20SnowDrop"
 
       - name: Push Docker image to GHCR
-        run: docker push ghcr.io/${{ github.repository }}:ltsc2019-"$ENV:Version"
+        run: docker push ${{ github.actor }}/nginx-win:ltsc2019-"$ENV:Version"
