@@ -8,6 +8,9 @@ name: Docker
 on:
   workflow_dispatch:
 
+env:
+  Version: "1.29.1.1%20SnowDrop"
+
 jobs:
   build:
 
@@ -24,9 +27,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build --build-arg VERSION="$ENV:Version" -t ${{ github.actor }}/nginx-win:ltsc2019-"$ENV:Version" .
-        env:
-          Version: "1.29.1.1%20SnowDrop"
+        run: docker build --build-arg VERSION="$ENV:Version" -t nginx-win:ltsc2019-"$ENV:Version" .
+      
+      - name: Tag Docker image
+        run: docker tag  ${{ github.actor }}/nginx-win:ltsc2019-"$ENV:Version"
 
       - name: Push Docker image to Docker Hub
         run: docker push ${{ github.actor }}/nginx-win:ltsc2019-"$ENV:Version"
