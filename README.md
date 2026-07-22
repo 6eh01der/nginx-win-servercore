@@ -9,13 +9,13 @@ Because `nginx-win` requires `vcredist` (C++ 2010) and `nanoserver` supports onl
 
 ## Build
 
-Set required nginx-win version (1.29.1.1%20SnowDrop for example, where %20 is URL-encoded space)
+Set required nginx-win version (`1.29.1.1%20SnowDrop` for example, where `%20` is URL-encoded space)
 
 ```powershell
 docker build --build-arg VERSION="1.29.1.1%20SnowDrop" -t nginx-win-servercore .
 ```
 
-Download URL, port and protocol could be overrided by relevant arguments - DLURL, PORT, PROTO. Default values are "http://nginx-win.ecsds.eu/download", "80" and "http". For example:
+Download URL, port and protocol could be overrided by relevant arguments - `DLURL`, `PORT`, `PROTO`. Default values are "http://nginx-win.ecsds.eu/download", "80" and "http". For example:
 
 ```powershell
 docker build --build-arg VERSION="1.29.1.1%20SnowDrop" --build-arg DLURL="http://somesite.com/download" -t nginx-win-servercore .
