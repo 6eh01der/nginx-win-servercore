@@ -13,8 +13,17 @@ env:
 
 jobs:
   build:
-
-    runs-on: windows-2022
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      matrix:
+        include:
+          - os: windows-2022
+            image_tag: "ltsc2022"
+            context_dir: "./2022"
+          - os: windows-2025
+            image_tag: "ltsc2025"
+            context_dir: "./2025"
 
     steps:
       - name: Checkout repository
@@ -27,7 +36,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build --build-arg VERSION="$ENV:Version" -t ${{ github.actor }}/nginx-win:ltsc2022-$($ENV:Version.split('%')[0]) ./2022
+        run: docker build --build-arg VERSION="$ENV:Version" -t ${{ github.actor }}/nginx-win:${{ matrix.image_tag }}-$($ENV:Version.split('%')[0]) ${{ matrix.context_dir }}
 
       - name: Push Docker image to Docker Hub
-        run: docker push ${{ github.actor }}/nginx-win:ltsc2022-$($ENV:Version.split('%')[0])
+        run: docker push ${{ github.actor }}/nginx-win:${{ matrix.image_tag }}-$($ENV:Version.split('%')[0])
