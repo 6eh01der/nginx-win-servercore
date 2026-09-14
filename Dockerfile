@@ -24,7 +24,7 @@ RUN $ErrorActionPreference = 'Stop'; \
     Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters' -Name ScreenUnreachableServers -Value 0 -Type DWord -Verbose; \
 # Shorten DNS cache times
     Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters' -Name MaxCacheTtl -Value 30 -Type DWord -Verbose; \
-    Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters' -Name MaxNegativeCacheTtl -Value 30 -Type DWord -Verbose
+    Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters' -Name MaxNegativeCacheTtl -Value 30 -Type DWord -Verbose; \
     icacls "C:\nginx-win" /grant "BUILTIN\Users:(OI)(CI)M" /verbose
 
 USER ContainerUser
