@@ -10,11 +10,11 @@ jobs:
 
   build:
 
-    runs-on: windows-2019
+    runs-on: windows-2025
 
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build --build-arg VERSION="$ENV:Version" -t nginx-win-servercore .
+      run: docker build --build-arg VERSION="$ENV:Version" -t nginx-win-servercore ./2025
       env:
-        Version: "1.29.1.1%20SnowDrop"
+        Version: "1.31.1.5%20SnowDrop"
