@@ -1,4 +1,5 @@
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+ARG IMAGE_VERSION=ltsc2019
+FROM mcr.microsoft.com/windows/servercore:${IMAGE_VERSION}
 ARG VERSION
 ARG DLURL="http://nginx-win.ecsds.eu/download"
 ENV PORT=80
@@ -24,6 +25,7 @@ RUN $ErrorActionPreference = 'Stop'; \
 # Shorten DNS cache times
     Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters' -Name MaxCacheTtl -Value 30 -Type DWord -Verbose; \
     Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters' -Name MaxNegativeCacheTtl -Value 30 -Type DWord -Verbose
+    icacls "C:\nginx-win" /grant "BUILTIN\Users:(OI)(CI)M" /verbose
 
 USER ContainerUser
 WORKDIR C:\\nginx-win

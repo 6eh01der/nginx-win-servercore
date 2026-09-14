@@ -15,13 +15,13 @@ jobs:
       matrix:
         include:
           - os: windows-2022
-            context_dir: "./2022"
+            image_tag: "ltsc2022"
           - os: windows-2025
-            context_dir: "./2025"
+            image_tag: "ltsc2025"
 
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build --build-arg VERSION="$ENV:Version" -t nginx-win-servercore ${{ matrix.context_dir }}
+      run: docker build --build-arg VERSION="$ENV:Version" --build-arg IMAGE_VERSION=${{ matrix.image_tag }} -t nginx-win-servercore .
       env:
         Version: "1.31.1.5%20SnowDrop"
