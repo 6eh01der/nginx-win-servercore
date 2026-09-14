@@ -4,21 +4,21 @@ Docker Hub repo - https://hub.docker.com/r/6eh01der/nginx-win
 
 Originally forked from https://github.com/olljanat/nginx-nanoserver this variant based on full featured, production ready nginx for windows http://nginx-win.ecsds.eu/.
 
-Because `nginx-win` requires `vcredist` (C++ 2010) and `nanoserver` supports only `MSIX` packages this `dockerfile` based on `servercore` image for ability to deploy required packages (`vcredist_x86.exe` & `vcredist_x64.exe`). Maybe later i'll try to investigate what exact components are needed and will build on `nanoserver`. Additionally the `nanoserver` does not contain `powershell` since 1709 version (should be installed additionally).
+Because `nginx-win` requires `vcredist` (C++ 2022) and `nanoserver` supports only `MSIX` packages this `dockerfile` based on `servercore` image for ability to deploy required packages (`vcredist_x86.exe` & `vcredist_x64.exe`). Maybe later i'll try to investigate what exact components are needed and will build on `nanoserver`. Additionally the `nanoserver` does not contain `powershell` since 1709 version (should be installed additionally).
 
 
 ## Build
 
-Set required nginx-win version (`1.29.1.1%20SnowDrop` for example, where `%20` is URL-encoded space)
+Set required nginx-win version (`1.31.1.5%20SnowDrop` for example, where `%20` is URL-encoded space)
 
 ```powershell
-docker build --build-arg VERSION="1.29.1.1%20SnowDrop" -t nginx-win-servercore .
+docker build --build-arg VERSION="1.31.1.5%20SnowDrop" -t nginx-win-servercore .
 ```
 
 Download URL, port and protocol could be overrided by relevant arguments - `DLURL`, `PORT`, `PROTO`. Default values are "http://nginx-win.ecsds.eu/download", "80" and "http". For example:
 
 ```powershell
-docker build --build-arg VERSION="1.29.1.1%20SnowDrop" --build-arg DLURL="http://somesite.com/download" -t nginx-win-servercore .
+docker build --build-arg VERSION="1.31.1.5%20SnowDrop" --build-arg DLURL="http://somesite.com/download" -t nginx-win-servercore .
 ```
 
 ## Run

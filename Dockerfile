@@ -12,9 +12,9 @@ RUN $ErrorActionPreference = 'Stop'; \
     Remove-Item -Path c:\nginx-${ENV:VERSION}.zip -Confirm:$False -Verbose; \
     Rename-Item -Path nginx-${ENV:VERSION} -NewName nginx-win -Verbose; \
 # Download and install vcredist
-    Invoke-WebRequest -Uri ${ENV:DLURL}/vcredist_x86.exe -OutFile c:\nginx-win\vcredist_x86.exe -Verbose; \
+    Invoke-WebRequest -Uri ${ENV:DLURL}/VS_2022_Redist/VC_redist.x86_2022.exe -OutFile c:\nginx-win\vcredist_x86.exe -Verbose; \
     C:\nginx-win\vcredist_x86.exe /q /norestart /serialdownload | Out-Null; \
-    Invoke-WebRequest -Uri ${ENV:DLURL}/vcredist_x64.exe -OutFile c:\nginx-win\vcredist_x64.exe -Verbose; \
+    Invoke-WebRequest -Uri ${ENV:DLURL}/VS_2022_Redist/VC_redist.x64_2022.exe -OutFile c:\nginx-win\vcredist_x64.exe -Verbose; \
     C:\nginx-win\vcredist_x64.exe /q /norestart /serialdownload | Out-Null; \
     Remove-Item -Path c:\nginx-win\* -Include vcredist_* -Confirm:$False -Verbose; \
 # Make sure that Docker always uses default DNS servers which hosted by Dockerd.exe
