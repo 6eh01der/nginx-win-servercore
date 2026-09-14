@@ -34,7 +34,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build --build-arg VERSION="$ENV:Version" -t ${{ github.actor }}/nginx-win:${{ matrix.image_tag }}-$($ENV:Version.split('%')[0]) .
+        run: docker build --build-arg VERSION="$ENV:Version" --build-arg IMAGE_VERSION=${{ matrix.image_tag }} -t ${{ github.actor }}/nginx-win:${{ matrix.image_tag }}-$($ENV:Version.split('%')[0]) .
 
       - name: Push Docker image to Docker Hub
         run: docker push ${{ github.actor }}/nginx-win:${{ matrix.image_tag }}-$($ENV:Version.split('%')[0])
