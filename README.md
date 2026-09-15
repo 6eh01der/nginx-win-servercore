@@ -9,10 +9,10 @@ Because `nginx-win` requires `vcredist` (C++ 2022) and `nanoserver` supports onl
 
 ## Build
 
-Set required nginx-win version (`1.31.1.5%20SnowDrop` for example, where `%20` is URL-encoded space)
+Set required nginx-win version and image tag. For example - `1.31.1.5%20SnowDrop` where `%20` is URL-encoded space and `ltsc2022` for windows server 2022 image (2019 by default).
 
 ```powershell
-docker build --build-arg VERSION="1.31.1.5%20SnowDrop" -t nginx-win-servercore .
+docker build --build-arg VERSION="1.31.1.5%20SnowDrop" --build-arg IMAGE_VERSION=ltsc2022 -t nginx-win-servercore .
 ```
 
 Download URL, port and protocol could be overrided by relevant arguments - `DLURL`, `PORT`, `PROTO`. Default values are "http://nginx-win.ecsds.eu/download", "80" and "http". For example:
